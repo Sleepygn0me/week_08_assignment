@@ -1,6 +1,7 @@
 import { db } from "@/utils/dbConnection";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import commentsStyles from "./comments.module.css";
 
 export default async function CommentsPage() {
   const postsQuery = await db.query(`SELECT id, title FROM posts`);
@@ -28,7 +29,7 @@ export default async function CommentsPage() {
       <h1 className="text-3xl font-bold">Being here before</h1>
 
       <h3 className="text-2xl font-semibold mt-8">Leave a Comment</h3>
-      <form action={handleSubmit} className="space-y-4 border p-4 rounded">
+      <form action={handleSubmit} className={commentsStyles.commentForm}>
         {/* Select which post to comment on */}
         <label htmlFor="post_id">Select Post:</label>
         <select name="post_id" required className="border p-2 w-full">
