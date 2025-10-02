@@ -1,5 +1,3 @@
-//TODO: set up a sorting filter (searchParams)
-
 import { db } from "@/utils/dbConnection";
 import Link from "next/link";
 
@@ -19,7 +17,7 @@ export default async function PostsPage({ searchParams }) {
     <div>
       <h1 className="text-2xl font-bold mb-4">Posts</h1>
 
-      {/* Sorting links */}
+      {/* Sort */}
       <div className="mb-4 space-x-2">
         <Link href="/posts?sort=asc" className="text-blue-600 underline">
           Sort A → Z

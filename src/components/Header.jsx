@@ -16,6 +16,13 @@ export default function Header() {
         >
           Posts
         </Link>
+
+        <Link
+          className="p-6 text-(--link-colour) hover:bg-(--accent-colour)"
+          href={"/comments"}
+        >
+          Comments form
+        </Link>
       </nav>
     </header>
   );
