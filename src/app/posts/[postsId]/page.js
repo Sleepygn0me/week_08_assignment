@@ -34,6 +34,17 @@ export default async function ContentPage({ params }) {
     redirect(`/posts/${postId}`);
   }
 
+  async function handleDeleteComment(formData) {
+    "use server";
+
+    const commentId = formData.get("comment_id");
+
+    await db.query(`DELETE FROM comments WHERE id = $1`, [commentId]);
+
+    revalidatePath(`/posts/${postId}`);
+    redirect(`/posts/${postId}`);
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
@@ -48,6 +59,13 @@ export default async function ContentPage({ params }) {
             <small className="text-gray-500">
               ({new Date(comment.created_at).toLocaleString()})
             </small>
+            {/* Delete button */}
+            <form action={handleDeleteComment}>
+              <input type="hidden" name="comment_id" value={comment.id} />
+              <button type="submit" className="text-red-600 hover:underline">
+                Delete
+              </button>
+            </form>
           </li>
         ))}
       </ul>
