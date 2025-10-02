@@ -2,8 +2,20 @@ import { db } from "@/utils/dbConnection";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export default function NewCommentPage({ params }) {
-  const postId = params.postId;
+export default async function ContentPage({ params }) {
+  const postId = params.postsId;
+
+  const postQuery = await db.query(
+    `SELECT id, title, content FROM posts WHERE id = $1`,
+    [postId]
+  );
+  // Fetch comments for this post
+  const commentsQuery = await db.query(
+    `SELECT id, author, content FROM comments WHERE post_id = $1 ORDER BY id ASC`,
+    [postId]
+  );
+  const comments = commentsQuery.rows;
+  const post = postQuery.rows[0];
 
   async function handleSubmit(formData) {
     "use server";
@@ -23,8 +35,24 @@ export default function NewCommentPage({ params }) {
   }
 
   return (
-    <>
-      <h1>Add a Comment</h1>
+    <div>
+      <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
+      <p className="mb-6">{post.content}</p>
+
+      <h2 className="text-xl font-semibold mb-2">Comments</h2>
+      {comments.length === 0 && <p>No comments yet.</p>}
+      <ul className="mb-6">
+        {comments.map((comment) => (
+          <li key={comment.id} className="border-b py-2">
+            <strong>{comment.author}:</strong> {comment.content}{" "}
+            <small className="text-gray-500">
+              ({new Date(comment.created_at).toLocaleString()})
+            </small>
+          </li>
+        ))}
+      </ul>
+
+      <h3 className="text-lg font-semibold mb-2">Add a Comment</h3>
       <form action={handleSubmit} className="space-y-4">
         <input type="hidden" name="post_id" value={postId} />
 
@@ -51,6 +79,6 @@ export default function NewCommentPage({ params }) {
           Submit Comment
         </button>
       </form>
-    </>
+    </div>
   );
 }
