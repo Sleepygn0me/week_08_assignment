@@ -1,5 +1,6 @@
 import { db } from "@/utils/dbConnection";
 import Link from "next/link";
+import postsStyles from "./posts.module.css";
 
 export default async function PostsPage({ searchParams }) {
   const queryResult = await db.query(`SELECT id, title, content FROM posts `);
@@ -30,8 +31,10 @@ export default async function PostsPage({ searchParams }) {
       {posts.map((post) => {
         return (
           // access the class names form teh style sheet
-          <div key={post.id}>
-            <Link href={`/posts/${post.id}`}>{post.title}</Link>
+          <div className={postsStyles.postCard} key={post.id}>
+            <Link href={`/posts/${post.id}`} className={postsStyles.postTitle}>
+              {post.title}
+            </Link>
           </div>
         );
       })}

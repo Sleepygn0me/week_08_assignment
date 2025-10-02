@@ -1,0 +1,27 @@
+.listContainer {
+  padding: 20px;
+}
+.link {
+  font-weight: 700;
+  color: var(--link-colour);
+  &:hover {
+    background-color: var(--accent-colour);
+  }
+}
+
+.postTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #060438; /* Indigo-900 */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.postCard {
+  background-color: rgba(255, 255, 255, 0.308);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}

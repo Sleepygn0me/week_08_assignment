@@ -59,7 +59,7 @@ export default async function CommentsPage() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition cursor-pointer"
         >
           Submit Comment
         </button>

@@ -46,7 +46,10 @@ export default async function ContentPage({ params }) {
   }
 
   return (
-    <div>
+    <div
+      className="max-w-3xl w-full p-6 space-y-6 bg-emerald-100
+     rounded-lg shadow-lg"
+    >
       <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
       <p className="mb-6">{post.content}</p>
 
@@ -92,7 +95,7 @@ export default async function ContentPage({ params }) {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition cursor-pointer"
         >
           Submit Comment
         </button>
