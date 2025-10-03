@@ -26,9 +26,13 @@ export default async function CommentsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Being here before</h1>
-
-      <h3 className="text-2xl font-semibold mt-8">Leave a Comment</h3>
+      <h1 className="text-4xl font-bold flex align-content: center;">
+        Comments Form
+      </h1>
+      <h2 className="text-2xl font-semibold mt-8">
+        {" "}
+        Being here before leave a comment
+      </h2>
       <form action={handleSubmit} className={commentsStyles.commentForm}>
         {/* Select which post to comment on */}
         <label htmlFor="post_id">Select Post:</label>
